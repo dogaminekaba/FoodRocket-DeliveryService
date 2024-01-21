@@ -1,0 +1,73 @@
+.btn{
+	font-family: Teko;
+	font-weight: 0;
+	font-size: 30px;
+	color: #fff;
+	background-color: #ff69af;
+	padding: 10px 30px;
+	border: solid #ffb9de 2px;
+	box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px 0px;
+	border-radius: 50px;
+	transition : 294ms;
+	transform: translateY(0);
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	cursor: pointer;
+}
+
+.btn:hover{
+	transition : 294ms;
+	padding: 10px 40px;
+	transform : translateY(-2px);
+	background-color: #000000;
+	color: #ff69af;
+	border: solid 2px #ffb9de;
+}
+
+.info-text{
+	font-family: Teko;
+	font-weight: 0;
+	font-size: 30px;
+	color: #ffffff;
+	white-space: pre-line;
+	line-height: 90%;
+	text-align: center;
+}
+
+.score-text{
+	font-family: Teko;
+	font-weight: 0;
+	font-size: 30px;
+	color: #ffffff;
+	white-space: pre-line;
+	line-height: 90%;
+	text-align: center;
+}
+
+.center {
+	margin: 0;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	-ms-transform: translate(-50%, -50%);
+	transform: translate(-50%, -50%);
+}
+
+.center-top {
+	margin: 0;
+	position: absolute;
+	top: 10%;
+	left: 50%;
+	-ms-transform: translate(-50%, -50%);
+	transform: translate(-50%, -50%);
+}
+
+.center-bottom {
+	margin: 0;
+	position: absolute;
+	top: 90%;
+	left: 50%;
+	-ms-transform: translate(-50%, -50%);
+	transform: translate(-50%, -50%);
+}

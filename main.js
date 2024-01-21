@@ -9,7 +9,11 @@ const loader = new GLTFLoader(manager);
 const textureLoader = new THREE.TextureLoader(manager);
 const inputMng = new InputHandler(document);
 
-let composer, outlinePass;
+var startGameBtn = document.getElementById('startGameBtn');
+var loadingBtn = document.getElementById('loadingBtn');
+var startTxt = document.getElementById('startTxt');
+var scoreTxt = document.getElementById('scoreTxt');
+var startSkipped = false;
 
 // Paths
 const shipAssetPath = '/Assets/strawberry_milk_delivery_spaceship/scene.gltf';
@@ -40,6 +44,15 @@ let gravity = 9.8;
 var cargoDistace = 50.0;
 const cameraOffset = new THREE.Vector3(0.0, 1.5 / shipScaleFactor, 5.0 / shipScaleFactor);
 
+var i = 0;
+var txt = 	`Year 2150, people travelled through space and settled in colonies. \n
+			It\'s all nice and tidy except one thing: they miss the authentic food! \n
+			As the FoodRocket Delivery Service, this epic task is yours to fulfill now. \n
+			Get your grocery list, collect all the items and deliver them to the people in space. \n
+			Ready to be a delivery hero?`;
+var speed = 10; /* The speed/duration of the effect in milliseconds */
+
+
 // const axesHelper = new THREE.AxesHelper( 100 );
 // axesHelper.position.set(10,10,10);
 // scene.add( axesHelper );
@@ -48,10 +61,30 @@ const cameraOffset = new THREE.Vector3(0.0, 1.5 / shipScaleFactor, 5.0 / shipSca
 renderer.setSize( window.innerWidth, window.innerHeight );
 document.body.appendChild( renderer.domElement );
 
-init();
+typeWriter();
 
-function init()
+function typeWriter() {
+	if (i < txt.length && !startSkipped) {
+		startTxt.innerHTML += txt.charAt(i);
+		i++;
+		// careful! Recursive function
+		setTimeout(typeWriter, speed);
+	}
+	else
+	{
+		console.log("typeWriter ended");
+	}
+}
+
+startGameBtn.onclick = function startGame()
 {
+	console.log("started");
+
+	startSkipped = true;
+	startTxt.style.visibility="hidden";
+	startGameBtn.setAttribute('disabled', true);
+	startGameBtn.textContent = "Loading...";
+
 	scene.add( light );
 
 	// add spaceship to scene
@@ -133,10 +166,12 @@ function init()
 	
 	} );
 
-
 };
 
 manager.onLoad = function ( ) {
+	startGameBtn.style.visibility="hidden";
+	scoreTxt.style.visibility="visible";
+
 	console.log( 'Loading complete!');
 
 	// call animate here to avoid rendering scene before loading assets
@@ -205,4 +240,3 @@ function logModelSize(obj)
 	const modelSize = boundingBox.getSize(new THREE.Vector3());
 	console.log(modelSize);
 }
-

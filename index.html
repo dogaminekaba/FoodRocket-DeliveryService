@@ -2,12 +2,26 @@
 <html lang="en">
 	<head>
 		<meta charset="utf-8">
-		<title>My first three.js app</title>
+		<title>Food Rocket</title>
+		<link rel="stylesheet" href="style.css">
 		<style>
-			body { margin: 0; }
+			@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Koulen&family=Lato&family=Nunito&family=Playfair+Display:ital@1&family=Prata&family=Raleway:ital,wght@1,100&family=Roboto&family=Roboto+Condensed&family=Teko&display=swap');
 		</style>
+		<link rel="shortcut icon" href="/assets/icons/pepper.png" />
 	</head>
-	<body>
-		<script type="module" src="/main.js"></script>
+	<body style="background-color:black;">
+		<div class="center-top">
+			<p class="score-text" id="scoreTxt" style="visibility: hidden;"> Delivered: 0/10 </p>
+		</div>
+		<div class="center">
+			<p class="info-text" id="startTxt"></p>
+			<script type="module" src="/main.js"></script>
+		</div>
+		<div class="center-bottom">
+			<button class="btn" id="loadingBtn" style="visibility: hidden;">Loading...</button>
+		</div>
+		<div class="center-bottom">
+			<button class="btn" id="startGameBtn">Deliver the Goods!</button>
+		</div>
 	</body>
 </html>
