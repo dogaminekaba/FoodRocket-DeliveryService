@@ -48,6 +48,11 @@ let gravity = 9.8;
 var cargoDistace = 50.0;
 const cameraOffset = new THREE.Vector3(0.0, 1.5 / shipScaleFactor, 5.0 / shipScaleFactor);
 
+// scores
+var collectedItemCount = 0;
+var deliveredItemCount = 0;
+var ListedItemCount = 10;
+
 var i = 0;
 var txt = 	`Year 2150, people travelled through space and settled in colonies. \n
 			It\'s all nice and tidy except one thing: they miss the authentic food! \n
@@ -161,8 +166,7 @@ startGameBtn.onclick = function startGame()
 	} );
 
 	// add cargos
-	apple = new FoodObject(FoodType.Apple);
-	apple.setScale(100);
+	apple = new FoodObject(FoodType.Apple, 100);
 	apple.setPosition(1000, 0, -1000);
 	apple.loadToScene(loader, scene);
 
@@ -170,6 +174,8 @@ startGameBtn.onclick = function startGame()
 
 manager.onLoad = function ( ) {
 	startGameBtn.style.visibility="hidden";
+
+	scoreTxt.textContent = "Collected: " + collectedItemCount + "/" + ListedItemCount;
 	scoreTxt.style.visibility="visible";
 
 	console.log( 'Loading complete!');
@@ -220,7 +226,9 @@ function animate() {
 	camera.position.copy(spaceShip.position).add(cameraOffset);
 
 	// rotate the collectables
-	apple.rotate(10);
+	if(apple != null) {
+		apple.rotate(10);
+	}
 	
 	pl1.rotation.x += 0.001;
 	pl1.rotation.z += 0.001;
@@ -228,9 +236,26 @@ function animate() {
 	pl2.rotation.x += 0.001;
 	pl2.rotation.y += 0.001;
 
+	checkCollisions();
+
 	prevTime = time;
 
 	renderer.render( scene, camera );
+
+	scoreTxt.textContent = "Collected: " + collectedItemCount + "/" + ListedItemCount;
+}
+
+function checkCollisions()
+{
+	let spaceShipBB = new THREE.Box3(new THREE.Vector3(), new THREE.Vector3());
+	spaceShipBB.setFromObject(spaceShip);
+
+	if(apple.bb != null && spaceShipBB.intersectsBox(apple.bb))
+	{
+		++collectedItemCount;
+		scene.remove(apple);
+		apple.dispose();
+	}
 }
 
 function logModelSize(obj)

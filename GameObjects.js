@@ -16,9 +16,10 @@ export const FoodType = {
 }
 
 export default class FoodObject extends THREE.Group {
-	constructor(foodObjType) {
+	constructor(foodObjType, scaleFactor) {
 		super();
 		this.foodType = foodObjType;
+		this.scaleVal = scaleFactor;
 		this.modelUrl = applePath;
 	}
   
@@ -26,6 +27,7 @@ export default class FoodObject extends THREE.Group {
 		const self = this;
 		loader.load( self.modelUrl, gltf => {
 			self.add(gltf.scene);
+			self.setScale(self.scaleVal)
 			scene.add(self);
 		} );
 	}
@@ -36,6 +38,10 @@ export default class FoodObject extends THREE.Group {
 
 	setScale(scaleVal) {
 		this.scale.set(scaleVal, scaleVal, scaleVal);
+
+		// create bounding box for collision detection
+		this.bb = new THREE.Box3(new THREE.Vector3(), new THREE.Vector3());
+		this.bb.setFromObject(this);
 	}
 
 	rotate(speed) {
@@ -44,7 +50,9 @@ export default class FoodObject extends THREE.Group {
 	}
 
 	dispose() {
-	  // Dispose everything that was created in this class - GLTF model, materials etc.
+		this.bb = null;
+		this.geometry.dispose();
+		this.material.dispose();
 	}
 }
 
