@@ -1,6 +1,8 @@
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import InputHandler from '/InputHandler.js';
+import FoodObject from './GameObjects';
+import FoodType from './GameObjects';
 
 const renderer = new THREE.WebGLRenderer();
 const scene = new THREE.Scene();
@@ -10,15 +12,17 @@ const textureLoader = new THREE.TextureLoader(manager);
 const inputMng = new InputHandler(document);
 
 var startGameBtn = document.getElementById('startGameBtn');
-var loadingBtn = document.getElementById('loadingBtn');
 var startTxt = document.getElementById('startTxt');
 var scoreTxt = document.getElementById('scoreTxt');
 var startSkipped = false;
 
+startTxt.onclick = (event) => {
+	startSkipped = true;
+};
+
 // Paths
 const shipAssetPath = '/Assets/strawberry_milk_delivery_spaceship/scene.gltf';
 const skyBoxPath = '/Assets/skybox_space_nebula/scene.gltf';
-const applePath = '/Assets/kenney_food-kit/Models/apple.gltf';
 
 const earthTexturePath = '/Assets/planets/textures/earth.jpg';
 const planet2TexturePath = '/Assets/planets/textures/2k_venus_surface.jpg';
@@ -49,7 +53,7 @@ var txt = 	`Year 2150, people travelled through space and settled in colonies. \
 			It\'s all nice and tidy except one thing: they miss the authentic food! \n
 			As the FoodRocket Delivery Service, this epic task is yours to fulfill now. \n
 			Get your grocery list, collect all the items and deliver them to the people in space. \n
-			Ready to be a delivery hero?`;
+			Ready to be a cargo hero?`;
 var speed = 10; /* The speed/duration of the effect in milliseconds */
 
 
@@ -72,6 +76,11 @@ function typeWriter() {
 	}
 	else
 	{
+		if(startSkipped)
+		{
+			startTxt.innerHTML = txt;
+		}
+
 		console.log("typeWriter ended");
 	}
 }
@@ -90,6 +99,7 @@ startGameBtn.onclick = function startGame()
 	// add spaceship to scene
 	loader.load( shipAssetPath, function ( gltf ) {
 
+		console.log("spaceship");
 		spaceShip = gltf.scene;
 		spaceShip.position.z = 10;
 		spaceShip.scale.set(shipScaleFactor,shipScaleFactor,shipScaleFactor);
@@ -107,6 +117,7 @@ startGameBtn.onclick = function startGame()
 	// add skybox to scene
 	loader.load( skyBoxPath, function ( gltf ) {
 
+		console.log("skybox");
 		skyBox = gltf.scene;
 		skyBox.scale.set(5,5,5);
 
@@ -150,21 +161,10 @@ startGameBtn.onclick = function startGame()
 	} );
 
 	// add cargos
-	loader.load( applePath, function ( gltf ) {
-
-		apple = gltf.scene;
-		apple.scale.set(100,100,100);
-		logModelSize(apple);
-
-		apple.position.set(1000, 0, -1000);
-
-		scene.add( apple );
-		
-	}, undefined, function ( error ) {
-	
-		console.error( error );
-	
-	} );
+	apple = new FoodObject(FoodType.Apple);
+	apple.setScale(100);
+	apple.setPosition(1000, 0, -1000);
+	apple.loadToScene(loader, scene);
 
 };
 
@@ -220,8 +220,7 @@ function animate() {
 	camera.position.copy(spaceShip.position).add(cameraOffset);
 
 	// rotate the collectables
-	apple.rotation.x += 0.01;
-	apple.rotation.y += 0.01;
+	apple.rotate(10);
 	
 	pl1.rotation.x += 0.001;
 	pl1.rotation.z += 0.001;
