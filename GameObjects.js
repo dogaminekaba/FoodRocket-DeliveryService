@@ -2,23 +2,31 @@ import * as THREE from 'three';
 
 const applePath = '/assets/kenney_food-kit/Models/apple.gltf';
 const piePath = '/assets/kenney_food-kit/Models/pie.gltf';
+const friesPath = '/assets/kenney_food-kit/Models/fries.gltf';
+const burgerPath = '/assets/kenney_food-kit/Models/burger.gltf';
+const meatballsPath = '/assets/kenney_food-kit/Models/meatballs.gltf';
+const cocktailPath = '/assets/kenney_food-kit/Models/cocktail.gltf';
+const chiliPath = '/assets/kenney_food-kit/Models/chili.gltf';
+const noodlePath = '/assets/kenney_food-kit/Models/noodle.gltf';
+
 const mercuryTexturePath = '/assets/planets/textures/2k_mercury.jpg';
 const venusTexturePath = '/assets/planets/textures/2k_venus_surface.jpg';
 const earthTexturePath = '/assets/planets/textures/earth.jpg';
 const marsTexturePath = '/assets/planets/textures/2k_mars.jpg';
 const jupiterTexturePath = '/assets/planets/textures/2k_jupiter.jpg';
+const saturnTexturePath = '/assets/planets/textures/2k_saturn.jpg';
+const uranusTexturePath = '/assets/planets/textures/2k_uranus.jpg';
+const neptuneTexturePath = '/assets/planets/textures/2k_neptune.jpg';
 
 export const FoodType = {
 	Apple: "Apple",
 	Pie: "Pie",
-	DonutSprinkles: "Sprinkled Donut",
 	Fries: "Fries",
 	Burger: "Burger",
-	PlateDinner: "Swedish Meatballs",
+	Meatballs: "Swedish Meatballs",
 	Cocktail: "Malibu Sunset",
-	Pepper: "Chili",
-	Broccoli: "Broccoli",
-	ChineseNoodle: "Noodle Box"
+	Chili: "Chili",
+	Noodle: "Noodle Box"
 }
 
 export class FoodObject extends THREE.Group {
@@ -34,6 +42,24 @@ export class FoodObject extends THREE.Group {
 				break;
 			case FoodType.Pie:
 				this.modelUrl = piePath;
+				break;
+			case FoodType.Fries:
+				this.modelUrl = friesPath;
+				break;
+			case FoodType.Burger:
+				this.modelUrl = burgerPath;
+				break;
+			case FoodType.Meatballs:
+				this.modelUrl = meatballsPath;
+				break;
+			case FoodType.Cocktail:
+				this.modelUrl = cocktailPath;
+				break;
+			case FoodType.Chili:
+				this.modelUrl = chiliPath;
+				break;
+			case FoodType.Noodle:
+				this.modelUrl = noodlePath;
 				break;
 			default:
 				break;
@@ -111,6 +137,15 @@ export class PlanetObject extends THREE.Group {
 				break;
 			case 5:
 				this.modelUrl = jupiterTexturePath;
+				break;
+			case 6:
+				this.modelUrl = saturnTexturePath;
+				break;
+			case 7:
+				this.modelUrl = uranusTexturePath;
+				break;
+			case 8:
+				this.modelUrl = neptuneTexturePath;
 				break;
 			default:
 				break;

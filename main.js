@@ -13,6 +13,7 @@ const inputMng = new InputHandler(document);
 var startGameBtn = document.getElementById('startGameBtn');
 var startTxt = document.getElementById('startTxt');
 var scoreTxt = document.getElementById('scoreTxt');
+var cargoScoreTxt = document.getElementById('cargoScoreTxt');
 var deliveryListPanel = document.getElementById('deliveryListPanel');
 var deliveryList = document.getElementById('deliveryList');
 var deliveryListDone = document.getElementById('deliveryListDone');
@@ -33,10 +34,11 @@ const direction = new THREE.Vector3();
 const shipScaleFactor = 0.05;
 const shipGlideFactor = 0.025;
 const shipAcc = 100.0;
-const cargoDistace = 50.0;
+const cargoDistace = 100.0;
 const cameraOffset = new THREE.Vector3(0.0, 1.5 / shipScaleFactor, 5.0 / shipScaleFactor);
 let prevTime = performance.now();
 let foodCount = 1;
+let planetCount = 8;
 
 // Objects in the scene
 const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, skyBoxScale * 1000 );
@@ -50,8 +52,8 @@ let collectedFoodNames = [];
 
 // scores
 var collectedItemCount = 0;
-var deliveredItemCount = 0;
-var ListedItemCount = 10;
+var deliveredCargoCount = -1;
+var ListedItemCount = 0;
 
 var i = 0;
 var txt = 	`Year 2150, people travelled through space and settled in colonies. \n
@@ -61,13 +63,7 @@ var txt = 	`Year 2150, people travelled through space and settled in colonies. \
 			Ready to be a cargo hero?`;
 var typeWriterSpeed = 10; /* The speed/duration of the effect in milliseconds */
 
-
-// const axesHelper = new THREE.AxesHelper( 100 );
-// axesHelper.position.set(10,10,10);
-// scene.add( axesHelper );
-
 // Configurations
-renderer.setSize( window.innerWidth, window.innerHeight);
 document.body.appendChild( renderer.domElement );
 
 typeWriter();
@@ -142,10 +138,10 @@ function startGame()
 
 	// add planets
 	planetList = [];
-	for (let index = 0; index < 5; index++) {
+	for (let index = 0; index < planetCount; index++) {
 		var volume = 50 * (index + 1);
 
-		var planetType = index % 5 + 1;
+		var planetType = index % planetCount + 1;
 		
 		var alternateX = ((index % 2) === 0) ? -1 : 1;
 
@@ -160,7 +156,7 @@ function startGame()
 	}
 
 	for (let index = 0; index < planetList.length; index++) {
-		var foodType = index % 2 + 1;
+		var foodType = index % 8 + 1;
 
 		var food;
 		switch(foodType)
@@ -169,7 +165,25 @@ function startGame()
 				food = new FoodObject(FoodType.Apple, 100);
 				break;
 			case 2:
-				food = new FoodObject(FoodType.Pie, 25);
+				food = new FoodObject(FoodType.Pie, 100);
+				break;
+			case 3:
+				food = new FoodObject(FoodType.Fries, 100);
+				break;
+			case 4:
+				food = new FoodObject(FoodType.Burger, 100);
+				break;
+			case 5:
+				food = new FoodObject(FoodType.Meatballs, 100);
+				break;
+			case 6:
+				food = new FoodObject(FoodType.Cocktail, 100);
+				break;
+			case 7:
+				food = new FoodObject(FoodType.Chili, 100);
+				break;
+			case 8:
+				food = new FoodObject(FoodType.Noodle, 100);
 				break;
 			default:
 				break;
@@ -207,9 +221,11 @@ function generateLevel()
 	}
 	ListedItemCount = foodDeliveryList.length;
 
-	if(foodCount < 4){
+	if(foodCount < foodList.length){
 		++foodCount;
 	}
+	++deliveredCargoCount;
+	updateGameUi();
 }
 
 function shuffle(array){ 
@@ -223,6 +239,7 @@ manager.onLoad = function ( ) {
 	startGameBtn.style.visibility="hidden";
 	deliveryListPanel.style.visibility="visible";
 	scoreTxt.style.visibility="visible";
+	cargoScoreTxt.style.visibility="visible";
 
 	foodList.forEach(food => {
 		food.enableBoundingBox();
@@ -327,7 +344,8 @@ function checkCollisions()
 
 function updateGameUi()
 {
-	scoreTxt.textContent = "Collected: " + collectedItemCount + "/" + ListedItemCount;
+	scoreTxt.textContent = 	"Collected: " + collectedItemCount + "/" + ListedItemCount;
+	cargoScoreTxt.textContent =	"Delivered: " + deliveredCargoCount;
 	
 	var listTxt = "";
 	var doneListTxt = "";
@@ -345,7 +363,8 @@ function updateGameUi()
 
 	if(collectedItemCount === ListedItemCount)
 	{
-		scoreTxt.textContent = "All parcels are collected!";
+		scoreTxt.textContent = 	"All parcels are collected!";
+		cargoScoreTxt.textContent =	"Delivered: " + deliveredCargoCount;
 		nextLevelBtn.style.visibility="visible";
 	}
 }

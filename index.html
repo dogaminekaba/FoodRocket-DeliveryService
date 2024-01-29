@@ -10,28 +10,32 @@
 		<link rel="shortcut icon" href="/assets/icons/pepper.png" />
 	</head>
 	<body style="background-color:black;">
-		<div class="center-top">
-			<p class="score-text" id="scoreTxt" style="visibility: hidden;"> Delivered: 0/10 </p>
-		</div>
-		<div class="center">
-			<p class="info-text" id="startTxt"></p>
-			<script type="module" src="/main.js"></script>
-		</div>
-		<div class="right-top">
-			<div class = "delivery-list" id ="deliveryListPanel" style="visibility: hidden;">
-				<p class = "delivery-item"> Delivery List: </p>
-				<p class = "delivery-item-done" id="deliveryListDone"> - Apple </p>
-				<p class = "delivery-item" id ="deliveryList"> - Pie </p>
-				<div class="center-bottom" style="visibility: hidden;">
-					<button class="btn" id="nextLevelBtn">Deliver!</button>
+		<div>
+			<div class="center-top">
+				<p class="score-text" id="scoreTxt" style="visibility: hidden;"> Delivered: 0/10 </p>
+			</div>
+			<div class="center">
+				<p class="info-text" id="startTxt"></p>
+				<script type="module" src="/main.js"></script>
+			</div>
+			<div class="right-top">
+				<div class = "delivery-list" id ="deliveryListPanel" style="visibility: hidden;">
+					<p class="score-text" id="cargoScoreTxt" > Delivered: 0 </p>
+					<br>
+					<p class = "delivery-item"> Delivery List: </p>
+					<p class = "delivery-item-done" id="deliveryListDone"> - Apple </p>
+					<p class = "delivery-item" id ="deliveryList"> - Pie </p>
+					<div class="list-center-bottom" style="visibility: hidden;">
+						<button class="btn" id="nextLevelBtn">Deliver!</button>
+					</div>
 				</div>
 			</div>
-		</div>
-		<div class="center-bottom">
-			<button class="btn" id="loadingBtn" style="visibility: hidden;">Loading...</button>
-		</div>
-		<div class="center-bottom">
-			<button class="btn" id="startGameBtn">Deliver the Goods!</button>
+			<div class="center-bottom">
+				<button class="btn" id="loadingBtn" style="visibility: hidden;">Loading...</button>
+			</div>
+			<div class="center-bottom">
+				<button class="btn" id="startGameBtn">Deliver the Goods!</button>
+			</div>
 		</div>
 	</body>
 </html>

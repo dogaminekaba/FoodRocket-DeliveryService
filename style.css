@@ -48,7 +48,7 @@
 .delivery-list{
 	border: solid #ffffff 3px;
 	border-radius: 10px;
-	padding: 30px 30px;
+	padding: 30px;
 	background: linear-gradient(
 		45deg,
 		rgba(205, 205, 255, 0.4),
@@ -118,4 +118,13 @@
 	left: 85%;
 	-ms-transform: translate(-50%, -50%);
 	transform: translate(-50%, -50%);
+}
+
+.list-center-bottom {
+	margin: 0;
+	position: relative;
+	top: 50%;
+	left: 50%;
+	-ms-transform: translate(-25%, -50%);
+	transform: translate(-25%, -50%);
 }
