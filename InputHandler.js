@@ -1,7 +1,5 @@
 export default class InputHandler{
 
-	listOpenAudio = new Audio('/audio/list_open_006.ogg');
-
 	constructor(doc){
 		this.doc = doc;
 		this.moveForward = false;
@@ -45,7 +43,6 @@ export default class InputHandler{
 
 			case 'Space':
 				this.thrust = true;
-				this.listOpenAudio.play();
 				break;
 		}
 	};
