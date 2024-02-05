@@ -10,6 +10,7 @@ const loader = new GLTFLoader(manager);
 const textureLoader = new THREE.TextureLoader(manager);
 const inputMng = new InputHandler(document);
 
+var gameTitle = document.getElementById('gameTitle');
 var startGameBtn = document.getElementById('startGameBtn');
 var startTxt = document.getElementById('startTxt');
 var scoreTxt = document.getElementById('scoreTxt');
@@ -97,7 +98,8 @@ function startGame()
 	console.log("started");
 
 	startSkipped = true;
-	startTxt.style.visibility="hidden";
+	gameTitle.style.display="none";
+	startTxt.style.display="none";
 	startGameBtn.setAttribute('disabled', true);
 	startGameBtn.textContent = "Loading...";
 
@@ -236,7 +238,7 @@ manager.onLoad = function ( ) {
 
 	updateGameUi();
 
-	startGameBtn.style.visibility="hidden";
+	startGameBtn.style.display="none";
 	deliveryListPanel.style.visibility="visible";
 	scoreTxt.style.visibility="visible";
 	cargoScoreTxt.style.visibility="visible";

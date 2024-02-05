@@ -24,7 +24,7 @@ export const FoodType = {
 	Fries: "Fries",
 	Burger: "Burger",
 	Meatballs: "Swedish Meatballs",
-	Cocktail: "Malibu Sunset",
+	Cocktail: "Cocktail",
 	Chili: "Chili",
 	Noodle: "Noodle Box"
 }

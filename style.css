@@ -2,7 +2,7 @@
 	font-family: Teko;
 	font-weight: 0;
 	font-size: 30px;
-	color: #fff;
+	color: #ffffff;
 	background-color: #ff69af;
 	padding: 10px 30px;
 	border: solid #ffb9de 2px;
@@ -28,6 +28,7 @@
 .info-text{
 	font-family: Teko;
 	font-weight: 0;
+	padding-top: 5%;
 	font-size: 30px;
 	color: #ffffff;
 	white-space: pre-line;
@@ -93,6 +94,22 @@
 	transform: translate(-50%, -50%);
 }
 
+.title-text {
+	font-family: 'Black Ops One';
+	font-size: 70px;
+	color: #ff69af;
+	text-shadow:
+		-3px -3px 0 #ffffff,  
+		3px -3px 0 #ffffff,
+		-3px  3px 0 #ffffff,
+		3px  3px 0 #ffffff;
+	margin: 0;
+	line-height: 0;
+	padding-top: 2%;
+	text-align: center;
+	animation: moveUpDown 2s ease-in-out infinite;
+}
+
 .center-top {
 	margin: 0;
 	position: absolute;
@@ -122,9 +139,18 @@
 
 .list-center-bottom {
 	margin: 0;
-	position: relative;
-	top: 50%;
+	position: absolute;
+	top: 90%;
 	left: 50%;
-	-ms-transform: translate(-25%, -50%);
-	transform: translate(-25%, -50%);
+	-ms-transform: translate(-25%, 0%);
+	transform: translate(-50%, 0%);
+}
+
+@keyframes moveUpDown {
+	0%, 100% {
+		transform: translateY(0);
+	}
+	50% {
+		transform: translateY(-20px);
+	}
 }

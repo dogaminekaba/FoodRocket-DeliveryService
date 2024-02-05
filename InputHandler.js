@@ -6,7 +6,7 @@ export default class InputHandler{
 		this.moveBackward = false;
 		this.moveLeft = false;
 		this.moveRight = false;
-		this.thrust = false; // TODO
+		this.thrust = false;
 		this.isMouseDown = false;
 		this.mousePosX = 0.0;
 		this.mousePosY = 0.0;
