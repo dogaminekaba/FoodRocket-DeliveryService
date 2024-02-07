@@ -25,8 +25,6 @@ var startSkipped = false;
 const shipAssetPath = '/assets/strawberry_milk_delivery_spaceship/scene.gltf';
 const skyBoxPath = '/assets/skybox_space_nebula/scene.gltf';
 const collectAudio = new Audio('/audio/collect_001.ogg');
-const openListAudio = new Audio('/audio/list_open_006.ogg');
-const closeListAudio = new Audio('/audio/list_close_006.ogg');
 
 // Values
 const skyBoxScale = 100;
