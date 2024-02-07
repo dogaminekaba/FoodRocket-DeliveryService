@@ -1,7 +1,7 @@
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import InputHandler from '/InputHandler.js';
-import {FoodObject, FoodType, PlanetObject, PlanetType } from './GameObjects';
+import { FoodObject, FoodType, PlanetObject } from './GameObjects';
 
 const renderer = new THREE.WebGLRenderer();
 const scene = new THREE.Scene();
