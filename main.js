@@ -1,7 +1,7 @@
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import InputHandler from '/InputHandler.js';
-import { FoodObject, FoodType, PlanetObject } from './GameObjects';
+import { FoodObject, FoodType, PlanetObject } from '/GameObjects.js';
 
 const renderer = new THREE.WebGLRenderer();
 const scene = new THREE.Scene();
@@ -22,9 +22,10 @@ var nextLevelBtn = document.getElementById('nextLevelBtn');
 var startSkipped = false;
 
 // Resources
-const shipAssetPath = '/assets/strawberry_milk_delivery_spaceship/scene.gltf';
-const skyBoxPath = '/assets/skybox_space_nebula/scene.gltf';
-const collectAudio = new Audio('/audio/collect_001.ogg');
+const assetsPath = 'public/assets/';
+const shipAssetPath = assetsPath + 'strawberry_milk_delivery_spaceship/scene.gltf';
+const skyBoxPath = assetsPath + 'skybox_space_nebula/scene.gltf';
+const collectAudio = new Audio(assetsPath + 'audio/collect_001.ogg');
 
 // Values
 const skyBoxScale = 100;

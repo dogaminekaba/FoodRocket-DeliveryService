@@ -1,22 +1,25 @@
 import * as THREE from 'three';
 
-const applePath = '/assets/kenney_food-kit/Models/apple.gltf';
-const piePath = '/assets/kenney_food-kit/Models/pie.gltf';
-const friesPath = '/assets/kenney_food-kit/Models/fries.gltf';
-const burgerPath = '/assets/kenney_food-kit/Models/burger.gltf';
-const meatballsPath = '/assets/kenney_food-kit/Models/meatballs.gltf';
-const cocktailPath = '/assets/kenney_food-kit/Models/cocktail.gltf';
-const chiliPath = '/assets/kenney_food-kit/Models/chili.gltf';
-const noodlePath = '/assets/kenney_food-kit/Models/noodle.gltf';
+const modelsPath = 'public/assets/kenney_food-kit/Models/';
+const texturesPath = 'public/assets/planets/textures/';
 
-const mercuryTexturePath = '/assets/planets/textures/2k_mercury.jpg';
-const venusTexturePath = '/assets/planets/textures/2k_venus_surface.jpg';
-const earthTexturePath = '/assets/planets/textures/earth.jpg';
-const marsTexturePath = '/assets/planets/textures/2k_mars.jpg';
-const jupiterTexturePath = '/assets/planets/textures/2k_jupiter.jpg';
-const saturnTexturePath = '/assets/planets/textures/2k_saturn.jpg';
-const uranusTexturePath = '/assets/planets/textures/2k_uranus.jpg';
-const neptuneTexturePath = '/assets/planets/textures/2k_neptune.jpg';
+const applePath = modelsPath + 'apple.gltf';
+const piePath = modelsPath + 'pie.gltf';
+const friesPath = modelsPath + 'fries.gltf';
+const burgerPath = modelsPath + 'burger.gltf';
+const meatballsPath = modelsPath + 'meatballs.gltf';
+const cocktailPath = modelsPath + 'cocktail.gltf';
+const chiliPath = modelsPath + 'chili.gltf';
+const noodlePath = modelsPath + 'noodle.gltf';
+
+const mercuryTexturePath = texturesPath + '2k_mercury.jpg';
+const venusTexturePath = texturesPath + '2k_venus_surface.jpg';
+const earthTexturePath = texturesPath + 'earth.jpg';
+const marsTexturePath = texturesPath + '2k_mars.jpg';
+const jupiterTexturePath = texturesPath + '2k_jupiter.jpg';
+const saturnTexturePath = texturesPath + '2k_saturn.jpg';
+const uranusTexturePath = texturesPath + '2k_uranus.jpg';
+const neptuneTexturePath = texturesPath + '2k_neptune.jpg';
 
 export const FoodType = {
 	Apple: "Apple",
