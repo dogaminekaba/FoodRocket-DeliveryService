@@ -1,7 +1,7 @@
 import * as THREE from 'three';
-import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
-import InputHandler from '/InputHandler.js';
-import { FoodObject, FoodType, PlanetObject } from './GameObjects';
+import { GLTFLoader } from 'https://dogaminekaba.github.io/FoodRocket-DeliveryService/node_modules/three/addons/loaders/GLTFLoader.js';
+import InputHandler from 'https://dogaminekaba.github.io/FoodRocket-DeliveryService/InputHandler.js';
+import { FoodObject, FoodType, PlanetObject } from 'https://dogaminekaba.github.io/FoodRocket-DeliveryService/GameObjects.js';
 
 const renderer = new THREE.WebGLRenderer();
 const scene = new THREE.Scene();
