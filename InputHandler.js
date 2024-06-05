@@ -41,7 +41,7 @@ export default class InputHandler{
 				this.moveRight = true;
 				break;
 
-			case 'Space':
+			case 'ShiftLeft':
 				this.thrust = true;
 				break;
 		}
@@ -71,7 +71,7 @@ export default class InputHandler{
 				this.moveRight = false;
 				break;
 
-			case 'Space':
+			case 'ShiftLeft':
 				this.thrust = false;
 				break;
 		}
