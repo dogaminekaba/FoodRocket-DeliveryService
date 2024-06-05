@@ -19,7 +19,7 @@
 		</script>
 	</head>
 	<body style="background-color:black;">
-		<div>
+		<div id="StartScreen">
 			<div class="title-text" id="gameTitle">
 				<p> Food Rocket </p>
 				<p> Delivery Service </p>
@@ -27,11 +27,19 @@
 			<div>
 				<p class="info-text" id="startTxt"></p>
 			</div>
+			<div class="center-bottom">
+				<button class="btn" id="loadingBtn" style="visibility: hidden;">Loading...</button>
+			</div>
+			<div class="center-bottom">
+				<button class="btn" id="startGameBtn">Deliver the Goods!</button>
+			</div>
+		</div>
+		<div id="GameplayScreen" style="display: none;">
+			<div id="GameContainer" class="game-container">
+				<script type="module" src="/main.js"></script>
+			</div>
 			<div class="center-top">
 				<p class="score-text" id="scoreTxt" style="visibility: hidden;"> Delivered: 0/10 </p>
-			</div>
-			<div class="center">
-				<script type="module" src="/main.js"></script>
 			</div>
 			<div class="right-top">
 				<div class = "delivery-list" id ="deliveryListPanel" style="visibility: hidden;">
@@ -44,12 +52,6 @@
 						<button class="btn" id="nextLevelBtn">Deliver!</button>
 					</div>
 				</div>
-			</div>
-			<div class="center-bottom">
-				<button class="btn" id="loadingBtn" style="visibility: hidden;">Loading...</button>
-			</div>
-			<div class="center-bottom">
-				<button class="btn" id="startGameBtn">Deliver the Goods!</button>
 			</div>
 		</div>
 	</body>

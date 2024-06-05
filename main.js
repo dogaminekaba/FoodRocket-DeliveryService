@@ -10,6 +10,9 @@ const loader = new GLTFLoader(manager);
 const textureLoader = new THREE.TextureLoader(manager);
 const inputMng = new InputHandler(document);
 
+var startScreen = document.getElementById('StartScreen');
+var gameScreen = document.getElementById('GameplayScreen');
+var container = document.getElementById('GameContainer');
 var gameTitle = document.getElementById('gameTitle');
 var startGameBtn = document.getElementById('startGameBtn');
 var startTxt = document.getElementById('startTxt');
@@ -50,29 +53,42 @@ let foodList = [];
 let foodDeliveryList = [];
 let collectedFoodNames = [];
 
-// scores
+// Scores
 var collectedItemCount = 0;
-var deliveredCargoCount = -1;
+var deliveredCargoCount = 0;
 var ListedItemCount = 0;
 
-var i = 0;
-var txt = 	`Year 2150, people travelled through space and settled in colonies. \n
-			It\'s all nice and tidy except one thing: they miss the authentic food! \n
-			As the FoodRocket Delivery Service, this epic task is yours to fulfill now. \n
-			Get your grocery list, collect all the items and deliver them to the people in space. \n
-			Ready to be a cargo hero?`;
-var typeWriterSpeed = 10; /* The speed/duration of the effect in milliseconds */
+// Config
+renderer.setPixelRatio( window.devicePixelRatio );
+renderer.setSize( window.innerWidth, window.innerHeight );
+container.appendChild( renderer.domElement );
 
-// Configurations
-document.body.appendChild( renderer.domElement );
+// Events
+startTxt.onclick = (event) => {
+	startSkipped = true;
+};
+window.addEventListener("resize", resizeGame);
+startGameBtn.addEventListener("click", startGame);
+nextLevelBtn.addEventListener("click", generateLevel);
+
+// Start Screen
+
+var i = 0;
+var txt = `Year 2150, people travelled through space and settled in colonies. \n
+	It\'s all nice and tidy except one thing: they miss the authentic food! \n
+	As the FoodRocket Delivery Service, this epic task is yours to fulfill now. \n
+	Get your grocery list, collect all the items and deliver them to the people in space. \n
+	Ready to be a cargo hero?`;
+var typeWriterSpeed = 10; /* The speed/duration of the effect in milliseconds */
 
 typeWriter();
 
 function typeWriter() {
+
 	if (i < txt.length && !startSkipped) {
 		startTxt.innerHTML += txt.charAt(i);
 		i++;
-		// careful! Recursive function
+		// Careful! Recursive function
 		setTimeout(typeWriter, typeWriterSpeed);
 	}
 	else
@@ -85,18 +101,15 @@ function typeWriter() {
 	}
 }
 
-startTxt.onclick = (event) => {
-	startSkipped = true;
-};
-
-startGameBtn.addEventListener("click", startGame);
-nextLevelBtn.addEventListener("click", generateLevel);
-
 function startGame()
 {
 	console.log("started");
-
+	
 	startSkipped = true;
+
+	startScreen.style.display="none";
+	gameScreen.style.display="block";
+
 	gameTitle.style.display="none";
 	startTxt.style.display="none";
 	startGameBtn.setAttribute('disabled', true);
@@ -107,7 +120,6 @@ function startGame()
 	// add spaceship to scene
 	loader.load( shipAssetPath, function ( gltf ) {
 
-		console.log("spaceship");
 		spaceShip = gltf.scene;
 		spaceShip.position.z = 10;
 		spaceShip.scale.set(shipScaleFactor,shipScaleFactor,shipScaleFactor);
@@ -125,7 +137,6 @@ function startGame()
 	// add skybox to scene
 	loader.load( skyBoxPath, function ( gltf ) {
 
-		console.log("skybox");
 		skyBox = gltf.scene;
 		skyBox.scale.set(skyBoxScale, skyBoxScale, skyBoxScale);
 		logModelSize(skyBox);
@@ -198,6 +209,7 @@ function startGame()
 		foodList.push(food);
 	}
 
+	++deliveredCargoCount;
 	generateLevel();
 };
 
@@ -225,8 +237,20 @@ function generateLevel()
 	if(foodCount < foodList.length){
 		++foodCount;
 	}
-	++deliveredCargoCount;
+	
 	updateGameUi();
+}
+
+function resizeGame()
+{
+	const width = window.innerWidth;
+	const height = window.innerHeight;
+
+	console.log("resize event. W: ", width, " H:", height);
+
+	renderer.setSize(width, height);
+	camera.aspect = width / height;
+	camera.updateProjectionMatrix();
 }
 
 function shuffle(array){ 
@@ -308,7 +332,6 @@ function animate() {
 
 	prevTime = time;
 
-	renderer.setSize( window.innerWidth, window.innerHeight);
 	renderer.render( scene, camera );
 
 	updateGameUi();
