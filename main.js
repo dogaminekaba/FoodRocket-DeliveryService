@@ -311,14 +311,8 @@ function animate() {
 
 	if ( inputMng.moveLeft || inputMng.moveRight ) 
 	{
-		// velocity.x += direction.x * shipSpeed * delta;
-		shipGlideAngle = (direction.x * shipSpeed * delta) * shipGlideFactor * 5;
-		camera.position.copy(spaceShip.position);
-
-		camera.rotation.y -= direction.x * 0.01;
-		spaceShip.rotation.y -= direction.x * 0.01;
-
-		camera.position.copy(spaceShip.position).add(cameraOffset);
+		velocity.x += direction.x * shipSpeed * delta;
+		shipGlideAngle = velocity.x * shipGlideFactor;
 	}
 	else
 	{
