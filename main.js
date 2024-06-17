@@ -35,10 +35,12 @@ const skyBoxScale = 100;
 const velocity = new THREE.Vector3();
 const direction = new THREE.Vector3();
 const shipScaleFactor = 0.05;
+// const topDownShipScaleFactor = 0.25;
 const shipGlideFactor = 0.025;
 const shipAcc = 100.0;
 const cargoDistace = 100.0;
 const cameraOffset = new THREE.Vector3(0.0, 1.5 / shipScaleFactor, 5.0 / shipScaleFactor);
+// const topDownCameraOffset = new THREE.Vector3(0.0, 200 / shipScaleFactor, 0.0);
 let prevTime = performance.now();
 let foodCount = 1;
 let planetCount = 8;
@@ -55,7 +57,7 @@ let collectedFoodNames = [];
 
 // Scores
 var collectedItemCount = 0;
-var deliveredCargoCount = 0;
+var deliveredCargoCount = -1;
 var ListedItemCount = 0;
 
 // Config
@@ -101,6 +103,8 @@ function typeWriter() {
 	}
 }
 
+// Game Start
+
 function startGame()
 {
 	console.log("started");
@@ -127,6 +131,13 @@ function startGame()
 		spaceShip.rotation.y = Math.PI;
 	
 		scene.add( spaceShip );
+
+		//Debug
+		// const axesHelper = new THREE.AxesHelper( 5 );
+		// scene.add( axesHelper );
+
+		// Top-Down camera rotation
+		// camera.rotation.x = -90 * Math.PI / 180
 		
 	}, undefined, function ( error ) {
 	
@@ -209,7 +220,6 @@ function startGame()
 		foodList.push(food);
 	}
 
-	++deliveredCargoCount;
 	generateLevel();
 };
 
@@ -238,6 +248,7 @@ function generateLevel()
 		++foodCount;
 	}
 	
+	++deliveredCargoCount;
 	updateGameUi();
 }
 
@@ -246,7 +257,7 @@ function resizeGame()
 	const width = window.innerWidth;
 	const height = window.innerHeight;
 
-	console.log("resize event. W: ", width, " H:", height);
+	// console.log("resize event. W: ", width, " H:", height);
 
 	renderer.setSize(width, height);
 	camera.aspect = width / height;
@@ -300,8 +311,14 @@ function animate() {
 
 	if ( inputMng.moveLeft || inputMng.moveRight ) 
 	{
-		velocity.x += direction.x * shipSpeed * delta;
-		shipGlideAngle = velocity.x * shipGlideFactor;
+		// velocity.x += direction.x * shipSpeed * delta;
+		shipGlideAngle = (direction.x * shipSpeed * delta) * shipGlideFactor * 5;
+		camera.position.copy(spaceShip.position);
+
+		camera.rotation.y -= direction.x * 0.01;
+		spaceShip.rotation.y -= direction.x * 0.01;
+
+		camera.position.copy(spaceShip.position).add(cameraOffset);
 	}
 	else
 	{
